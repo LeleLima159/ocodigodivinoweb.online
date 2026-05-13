@@ -34,6 +34,36 @@
       fbq("init", "1993859991549375");
       fbq("track", "PageView");
     </script>
+    <script>
+let viewContentDisparado = false;
+
+function dispararViewContent() {
+    if (!viewContentDisparado) {
+        fbq('track', 'ViewContent');
+        viewContentDisparado = true;
+
+        console.log('ViewContent disparado');
+    }
+}
+
+setTimeout(function() {
+
+    window.addEventListener('scroll', function() {
+
+        let scrollTotal = document.documentElement.scrollHeight - window.innerHeight;
+
+        let scrollAtual = window.scrollY;
+
+        let porcentagem = (scrollAtual / scrollTotal) * 100;
+
+        if (porcentagem >= 30) {
+            dispararViewContent();
+        }
+
+    });
+
+}, 15000);
+</script>
     <noscript
       ><img
         height="1"
